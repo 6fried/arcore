@@ -22,6 +22,7 @@
   if (isArSessionSupported) {
     document.getElementById("enter-ar").addEventListener("click", window.app.activateXR)
   } else {
+    console.log("Failure to launch XR")
     onNoXRDevice();
   }
 })();
