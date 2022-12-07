@@ -37,7 +37,7 @@ class App {
   activateXR = async () => {
     try {
       // Initialize a WebXR session using "immersive-ar".
-      this.xrSession = await navigator.xr.requestSessino("immersive-ar");
+      this.xrSession = await navigator.xr.requestSession("immersive-ar");
 
       // Create the canvas that will contain our camera's background and our virtual scene.
       this.createXRCanvas();
