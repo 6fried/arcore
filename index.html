@@ -69,7 +69,7 @@
 			const referenceSpace = await session.requestReferenceSpace('local');
 
 					// Create a render loop that allows us to draw the AR view.
-			const onxrframe = (time, frame) => {
+			const onXRFrame = (time, frame) => {
 				// Queus up the next draw request.
 				session.requestAnimationFrame(onXRFrame);
 
