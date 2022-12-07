@@ -37,7 +37,7 @@ class App {
   activateXR = async () => {
     try {
       // Initialize a WebXR session using "immersive-ar".
-      this.xrSession = /* TODO */;
+      this.xrSession = await navigator.xr.requestSessino("immersive-ar");
 
       // Create the canvas that will contain our camera's background and our virtual scene.
       this.createXRCanvas();
@@ -74,7 +74,7 @@ class App {
     this.setupThreeJs();
 
     // Setup an XRReferenceSpace using the "local" coordinate system.
-    this.localReferenceSpace = /* TODO */;
+    this.localReferenceSpace = await this.xrSession.requestReferenseSpace("local");
 
     // Start a rendering loop using this.onXRFrame.
     this.xrSession.requestAnimationFrame(this.onXRFrame);
@@ -85,7 +85,31 @@ class App {
    * Called with the time and XRPresentationFrame.
    */
   onXRFrame = (time, frame) => {
-    /** TODO draw the application */
+    // Queue up the next draw request.
+    this.xrSession.requestAnimationFrame(this.onXRFrame);
+    // Bind the graphics framebuffer to the baseLayer's framebuffer.
+    const framebuffer = this.xrSession.renderState.baseLayer.framebuffer;
+    this.gl.bindFramebuffer(this.xrSession.FRAMEBUFFER, framebuffer);
+    this.renderer.setFramebuffer(framebuffer);
+
+    // Retrieve the pose of the device.
+    // XRFrame.getViewerPose can return null while the session attempts to establish tracking.
+    const pose = frame.getViewerPose(this.localReferenceSpace);
+    if (pose) {
+      // In mobile AR, we only have one view.
+      const view = pose.views[0];
+
+      const viewport = this.xrSession.renderState.baseLayer.getViewport(view);
+      this.renderer.setSize(viewport.width, viewport.height);
+
+      // Use the view's transform matrix and projection matrix to configure the THREE.camera.
+      this.camera.matrix.fromArray(view.transform.matrix);
+      this.camera.projectionMatrix.fromArray(view.projectionMatrix);
+      this.camera.updateMatrixWorld(true);
+
+      // Render the scene with THREE.WebGLRenderer.
+      this.renderer.render(this.scene, this.camera);
+    }
   }
 
   /**
