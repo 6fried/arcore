@@ -12,7 +12,7 @@
 <body>
     <!-- Starting an immersive WebXR session requires user interaction.
     We start one with a simple button. -->
-    <button onclick = "activateXR()">Start Web AR App</button>
+    <button onclick = "activateXR()">Start Web AR</button>
 
     <script>
         async function activateXR() {
@@ -84,7 +84,7 @@
                     // Use the view's transform matrix and projection matrix to configure the THREE.camera
                     camera.matrix.fromArray(view.transform.matrix)
                     camera.projectionMatrix.fromArray(view.projectionMatrix);
-                    camera.updateMatricWorld(true);
+                    camera.updateMatrixWorld(true);
 
                     // Render the scene with THREE.WebGLRenderer.
                     renderer.render(scene, camera)
