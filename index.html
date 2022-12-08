@@ -12,7 +12,7 @@
 <body>
     <!-- Starting an immersive WebXR session requires user interaction.
     We start one with a simple button. -->
-    <button onclick = "activateXR()">Start Web AR</button>
+    <button onclick = "activateXR()">Start Web AR App</button>
 
     <script>
         async function activateXR() {
@@ -55,7 +55,7 @@
 
             // Initialize a WebXR session using "immersive-ar"
             const session = await navigator.xr.requestSession("immersive-ar");
-            sessino.updateRenderState({
+            session.updateRenderState({
                 baseLayer: new XRWebGLLayer(session, gl)
             })
 
