@@ -12,7 +12,7 @@
 <body>
     <!-- Starting an immersive WebXR session requires user interaction.
     We start one with a simple button. -->
-    <button onclick = "activeteXR()">Start Web AR Experience</button>
+    <button onclick = "activeteXR()">Start Web AR</button>
 
     <script>
         async function activateXR() {
@@ -62,6 +62,35 @@
             // A 'local' reference has a native origin that is located
             // near the viewer's position at the time the session was created.
             const referenceSpace = await sessinon.requestReferenceSpace('local');
+
+            // Create a render loo^that allows us to draw on the AR view.
+            const onXRFrame = (time, frame) => {
+                // Queue up the next draw request.
+                session.requestAnimationFrame(onXRFrame);
+
+                // Bind the graphics framebuffer to the baseLayer's framebuffer
+                gl.bindFramebuffer(gl.FRAMEBUFFER, session.renderState.baseLayer.framebuffer)
+
+                // Retrieve the pose of the device.
+                // XRFrame.getViewerPose can return null while the session attempts to establish tracking
+                const pose = frame.getViewerPose(referenceSpace);
+                if (pose) {
+                    // In mobile AR, we only have one view.
+                    const view = pose.views[0];
+
+                    const viewport = session.renderStare.baseLayer.getViewport(view);
+                    render.setSize(viewport.width, viewport.height)
+
+                    // Use the view's transform matrix and projection matrix to configure the THREE.camera
+                    camera.matrix.fromArray(view.transform.matrix)
+                    camera.projectionMatrix.fromArray(view.projectionMatrix);
+                    camera.updateMatricWorld(true);
+
+                    // Render the scene with THREE.WebGLRenderer.
+                    renderer.render(scene, camera)
+                }
+            }
+            sessinon.requestAnimationFrame(onXRFrame);
         }
     </script>
 </body>
