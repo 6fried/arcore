@@ -3,7 +3,7 @@
  * Licensed under the Apache License, Version 2.0 (the 'License');
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -22,7 +22,6 @@
   if (isArSessionSupported) {
     document.getElementById("enter-ar").addEventListener("click", window.app.activateXR)
   } else {
-    console.log("Failure to launch XR")
     onNoXRDevice();
   }
 })();
@@ -75,7 +74,7 @@ class App {
     this.setupThreeJs();
 
     // Setup an XRReferenceSpace using the "local" coordinate system.
-    this.localReferenceSpace = await this.xrSession.requestReferenseSpace("local");
+    this.localReferenceSpace = await this.xrSession.requestReferenceSpace("local");
 
     // Start a rendering loop using this.onXRFrame.
     this.xrSession.requestAnimationFrame(this.onXRFrame);
@@ -86,11 +85,10 @@ class App {
    * Called with the time and XRPresentationFrame.
    */
   onXRFrame = (time, frame) => {
-    // Queue up the next draw request.
     this.xrSession.requestAnimationFrame(this.onXRFrame);
-    // Bind the graphics framebuffer to the baseLayer's framebuffer.
-    const framebuffer = this.xrSession.renderState.baseLayer.framebuffer;
-    this.gl.bindFramebuffer(this.xrSession.FRAMEBUFFER, framebuffer);
+
+    const framebuffer = this.xrSession.updateRenderState.baseLayer.framebuffer;
+    this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, framebuffer);
     this.renderer.setFramebuffer(framebuffer);
 
     // Retrieve the pose of the device.
@@ -112,6 +110,7 @@ class App {
       this.renderer.render(this.scene, this.camera);
     }
   }
+
 
   /**
    * Initialize three.js specific rendering code, including a WebGLRenderer,
