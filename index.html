@@ -1,19 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Ma scène AR avec Three.js</title>
-  <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.111.0/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@arjs/aframe@2.0.0/dist/aframe-ar.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>WebAR</title>
+
+    <!-- three.js -->
+    <script src="https://unpkg.com/three@0.126.0/build/three.js"></script>
 </head>
-<body style="margin : 0px; overflow: hidden;">
-  <a-scene embedded arjs>
-    <a-marker-camera preset='hiro'>
-      <a-box position='0 0.5 0' material='color: red;'></a-box>
-      <a-box position='0 0.5 -1' material='color: green;'></a-box>
-      <a-box position='-1 0.5 0' material='color: blue;'></a-box>
-      <a-box position='-1 0.5 -1' material='color: yellow;'></a-box>
-    </a-marker-camera>
-  </a-scene>
+<body>
+    <!-- Starting an immersive WebXR session requires user interaction.
+    We start one with a simple button. -->
+    <button onclick = "activateXR()">Start Web AR</button>
+
+    <script>
+        async function activateXR() {// créer une instance de la classe THREE.WebXRManager
+const xrManager = new THREE.WebXRManager();
+
+// créer une instance de la classe THREE.Scene
+const scene = new THREE.Scene();
+
+// créer une instance de la classe THREE.BoxGeometry
+const geometry = new THREE.BoxGeometry(1, 1, 1);
+
+// créer un tableau de couleurs
+const colors = [
+  0xff0000, // rouge
+  0x00ff00, // vert
+  0x0000ff, // bleu
+  0xffff00, // jaune
+  0xff00ff, // violet
+  0x00ffff, // cyan
+];
+
+// créer un tableau de matériaux
+const materials = colors.map((color) => new THREE.MeshBasicMaterial({ color }));
+
+// créer une instance de la classe THREE.Mesh en utilisant le tableau de matériaux
+const cube = new THREE.Mesh(geometry, materials);
+
+// ajouter le cube à la scène
+scene.add(cube);
+
+// utiliser l'instance de WebXRManager pour afficher la scène dans la vue AR
+xrManager.render(scene);
+}
+    </script>
 </body>
 </html>
