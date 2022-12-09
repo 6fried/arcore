@@ -83,7 +83,7 @@ class App {
     const pose = frame.getViewerPose(this.localReferenceSpace);
     if (pose) {
       // In mobile AR, we only have one view.
-      const view = pose.views[0];
+      const view = pose.views[0]; 
 
       const viewport = this.xrSession.renderState.baseLayer.getViewport(view);
       this.renderer.setSize(viewport.width, viewport.height);
