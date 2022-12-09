@@ -59,7 +59,7 @@ class App {
     this.setupThreeJs();
 
     // Setup an XRReferenceSpace using the "local" coordinate system.
-    this.localReferenceSpace = await this.xrSession.requestReferenceSpace("local");;
+    this.localReferenceSpace = await this.xrSession.requestReferenceSpace("local");
 
     // Start a rendering loop using this.onXRFrame.
     this.xrSession.requestAnimationFrame(this.onXRFrame);
@@ -94,7 +94,7 @@ class App {
       this.camera.updateMatrixWorld(true);
 
       // Render the scene with THREE.WebGLRenderer
-      this.renderer.render(this.scene, this.camera);
+      this.renderer.render(this.scene, this.camera);z
     }
   }
 
