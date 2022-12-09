@@ -15,37 +15,11 @@
     <button onclick = "activateXR()">Start Web AR</button>
 
     <script>
-        async function activateXR() {// créer une instance de la classe THREE.WebXRManager
-const xrManager = new THREE.WebXRManager();
-
-// créer une instance de la classe THREE.Scene
-const scene = new THREE.Scene();
-
-// créer une instance de la classe THREE.BoxGeometry
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-
-// créer un tableau de couleurs
-const colors = [
-  0xff0000, // rouge
-  0x00ff00, // vert
-  0x0000ff, // bleu
-  0xffff00, // jaune
-  0xff00ff, // violet
-  0x00ffff, // cyan
-];
-
-// créer un tableau de matériaux
-const materials = colors.map((color) => new THREE.MeshBasicMaterial({ color }));
-
-// créer une instance de la classe THREE.Mesh en utilisant le tableau de matériaux
-const cube = new THREE.Mesh(geometry, materials);
-
-// ajouter le cube à la scène
-scene.add(cube);
-
-// utiliser l'instance de WebXRManager pour afficher la scène dans la vue AR
-xrManager.render(scene);
-}
+        async function activateXR() {
+            const canvas = document.createElement("canvas");
+            document.body.appendChild(canvas);
+            const gl = canvas.getContext("webgl", {srCompatible: true});
+        }
     </script>
 </body>
 </html>
