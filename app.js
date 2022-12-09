@@ -92,7 +92,7 @@ class App {
       this.camera.matrix.fromArray(view.transform.matrix);
       this.camera.projectionMatrix.fromArray(view.projectionMatrix);
       this.camera.updateMatrixWorld(true);
-
+ 
       // Render the scene with THREE.WebGLRenderer
       this.renderer.render(this.scene, this.camera);
     }
