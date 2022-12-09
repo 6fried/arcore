@@ -94,7 +94,7 @@ class App {
       this.camera.updateMatrixWorld(true);
 
       // Render the scene with THREE.WebGLRenderer
-      this.renderer.render(this.scene, this.camera);z
+      this.renderer.render(this.scene, this.camera);
     }
   }
 
