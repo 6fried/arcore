@@ -88,21 +88,10 @@ window.DemoUtils = {
       new THREE.MeshBasicMaterial({ color: 0xffff00 })
     ];
 
-    // const ROW_COUNT = 4;
-    // const SPREAD = 1;
-    // const HALF = ROW_COUNT / 2;
-    // for (let i = 0; i < ROW_COUNT; i++) {
-    //   for (let j = 0; j < ROW_COUNT; j++) {
-    //     for (let k = 0; k < ROW_COUNT; k++) {
-    //       const box = new THREE.Mesh(new THREE.BoxBufferGeometry(0.2, 0.2, 0.2), materials);
-    //       box.position.set(i - HALF, j - HALF, k - HALF);
-    //       box.position.multiplyScalar(SPREAD);
+    
     const box = new THREE.Mesh(new THREE.BoxBufferGeometry(0.2, 0.2, 0.2), materials);
     box.position.set(1, 1, 1);
     scene.add(box);
-      //   }
-    //   }
-    // }
 
     return scene;
   },
