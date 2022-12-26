@@ -70,7 +70,7 @@ class App {
      * a demo scene, and a camera for viewing the 3D content.
      */
     setupThreeJS() {
-        this.renderer = new this.setupThreeJS.WebGLRenderer({
+        this.renderer = new THREE.WebGLRenderer({
             alpha: true,
             preserveDrawingBuffer: true,
             canvas: this.canvas,
