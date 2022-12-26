@@ -79,9 +79,9 @@ class App {
         this.renderer.autoClear = false;
 
         // this.scene = Utils.createCubeScene();
-        this.scene = DemoUtils.createCubeScene();
+        this.scene = Utility.createCubeScene();
 
-        this.Camera = new this.setupThreeJS.PerspectiveCamera();
+        this.Camera = new THREE.PerspectiveCamera();
         this.Camera.matrixAutoUpdate = false;
     }
 
@@ -92,7 +92,7 @@ class App {
     onXRFrame = (time, frame) => {
         this.xrSession.requestAnimationFrame(this.onXRFrame);
 
-        const framebuffer = this.xrSession.updateRenderState.baseLayer.framebuffer;
+        const framebuffer = this.xrSession.renderState.baseLayer.framebuffer;
         this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, framebuffer);
         this.renderer.SetFramebuffer(framebuffer);
 
