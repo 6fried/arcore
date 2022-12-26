@@ -1,7 +1,7 @@
 
-(async function(){
-    const isArSupported = naxigator.xr && navidator.xr.isSessionSupported && await navigator.xr.isSessionSupported("immersive-ar");
-    if(isArSupported){
+(async function() {
+    const isArSupported = navigator.xr && navigator.xr.isSessionSupported && await navigator.xr.isSessionSupported("immersive-ar");
+    if(isArSupported) {
         document.getElementById("enter-ar").addEventListener("click", window.app.activateXR)
     } else {
         onNoXRDevice();
