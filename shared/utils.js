@@ -95,7 +95,7 @@ window.DemoUtils = {
     //   for (let j = 0; j < ROW_COUNT; j++) {
     //     for (let k = 0; k < ROW_COUNT; k++) {
           const box = new THREE.Mesh(new THREE.BoxBufferGeometry(0.2, 0.2, 0.2), materials);
-          box.position.set(1, 1, 1);
+          box.position.set(0, 0, 0);
           // box.position.multiplyScalar(1); 
           scene.add(box);
     //     }
