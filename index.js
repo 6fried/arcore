@@ -81,8 +81,8 @@ class App {
         // this.scene = Utils.createCubeScene();
         this.scene = Utility.createCubeScene();
 
-        this.Camera = new THREE.PerspectiveCamera();
-        this.Camera.matrixAutoUpdate = false;
+        this.camera = new THREE.PerspectiveCamera();
+        this.camera.matrixAutoUpdate = false;
     }
 
     /**
@@ -103,9 +103,9 @@ class App {
             const viewport = this.xrSession.renderState.baseLayer.getViewport(view);
             this.renderer.setSize(viewport.width, viewport.height);
 
-            this.Camera.matrix.fromArray(view.transform.matrix);
-            this.Camera.projectionMatrix.fromArray(view.projectionMatrix);
-            this.Camera.updateMatrixWorld(true);
+            this.camera.matrix.fromArray(view.transform.matrix);
+            this.camera.projectionMatrix.fromArray(view.projectionMatrix);
+            this.camera.updateMatrixWorld(true);
 
             this.renderer.render(this.scene, this.camera);
         }
